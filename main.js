@@ -3,7 +3,7 @@ const lib = require("./lib");
 let filename = "test.mp4";
 lib.getAudio("./test.mp4", function (err) {
   if (!err) {
-    console.log("conversion complete");
+    
     //...
   }
 });
