@@ -1,21 +1,21 @@
 # hot-lecture-digest
 
-Desktop app for lecture summarization
+## Desktop app for lecture summarization
 
-A brief overview
+## A brief overview
 
-Links to resources
+## Links to resources
 
-Installation
+## Installation
 
-API reference
+## API reference
 
-Examples
+## Examples
 
-Releases (versions)
+## Releases (versions)
 
-How to contribute
+## How to contribute
 
-License
+## License
 
-Code of Conduct
+## Code of Conduct

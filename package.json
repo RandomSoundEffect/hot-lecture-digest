@@ -1,0 +1,31 @@
+{
+  "name": "hot-lecture-digest",
+  "version": "0.1.0",
+  "description": "2021-Spring OSSP final project | group 5 ",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OSSP-group-5/hot-lecture-digest.git"
+  },
+  "keywords": [
+    "lecture"
+  ],
+  "author": "group 5",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OSSP-group-5/hot-lecture-digest/issues"
+  },
+  "homepage": "https://github.com/OSSP-group-5/hot-lecture-digest#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  },
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.0.20",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "path": "^0.12.7"
+  }
+}
