@@ -57,7 +57,7 @@
           <div class="col-md-8">
             <div class="card mb-3">
               <div class="card-body">
-                <h6 class="d-flex align-items-center mb-3" id="lecture-name">
+                <h6 class="d-flex align-items-center mb-3" id="courses">
                   Lectures
                 </h6>
                 <div id="lecture-list"></div>
@@ -72,11 +72,17 @@
 
                     <div class="form-popup" id="myForm">
                       <form action="/action_page.php" class="form-container">
-                        <label for="name"><b>Lecture Name</b></label>
+                        <label for="course"><b>Course</b></label>
+                        <input
+                          type="text"
+                          placeholder="Enter Course name..."
+                          id="course-name"
+                        />
+                        <label for="name"><b>Name</b></label>
                         <input
                           type="text"
                           placeholder="Enter lecture name..."
-                          id="name"
+                          id="lecture-name"
                         />
 
                         <label for="week"><b>Week</b></label>
@@ -89,24 +95,26 @@
                         <label for="date"><b>Due Date</b></label>
                         <input type="date" id="date" />
 
-                        <label for="professor"><b>Professor</b></label>
+                        <!-- move professor property to add class section -->
+                        <!-- <label for="professor"><b>Professor</b></label>
                         <input
                           type="text"
                           placeholder="Enter Professor..."
                           id="professor"
-                        />
+                        /> -->
 
-                        <label for="file"><b>Lecture Video Import</b></label>
-                        <!-- Limit the types of files user can select added -->
-                        <input
-                          type="file"
-                          id="file-selector"
-                          accept=".mp4"
-                          required
-                        />
+                        <label for="file"><b>Video Import</b></label>
+                        <input type="file" id="file" required />
 
                         <hr />
-                        <button type="submit" class="btn">Confirm</button>
+                        <button
+                          type="button"
+                          class="btn"
+                          id="submit"
+                          onclick="closeForm()"
+                        >
+                          Submit
+                        </button>
                         <button
                           type="button"
                           class="btn cancel"
@@ -128,7 +136,9 @@
               <div class="col-sm-12 mb-3">
                 <div class="card h-100">
                   <div class="card-body">
-                    <h6 class="d-flex align-items-center mb-3">Summary</h6>
+                    <h6 class="d-flex align-items-center mb-3">
+                      Your week is here:
+                    </h6>
                     Pan-searing is the best way to cook a steak, and it's also
                     the easiest! I love the kind of dinner that you can cook
                     without a recipe. The truth is, good cooking is more about
@@ -145,44 +155,18 @@
     </div>
     <script>
       //define datatypes
-      const Course = {
-        Name: (lectureName = ""),
-        Professor: (professorName = ""),
-        LectureList: { Week: (lectureList = []) },
-      };
-      const Lecture = {
-        Due: "",
-        Week: 0,
-        Summary: "sth",
-      };
+      // const Course = {
+      //   Name: (courseName = ""),
+      //   Professor: (professorName = ""),
+      //   LectureList: { Week: (lectures = []) },
+      // };
 
       let courses = [];
 
-      function lectureInit() {
-        // 1. Read the text in #course-input.
-        let input = document.querySelector("#course-input");
-        let text = input.value;
-
-        if (!text.length) return;
-
-        let course = {
-          text: text,
-          lectures: [], // list of lectures
-        };
-        // 3. Append the new course object to courses
-        courses.push(course);
-        saveCourses();
-
-        // 4. Create a new task item and attach it to #todo-list.
-        addCourse(course);
-
-        // 5. Clear #task-input.
-        input.value = "";
-      } //get user input
-
-      function addCourse(course) {
-        courses.push(course);
-      }
+      // @ what is it?
+      // function addCourse(course) {
+      //   courses.push(course);
+      // }
       //
 
       function loadCourses() {
@@ -299,15 +283,59 @@
         document.getElementById("myForm").style.display = "none";
       }
 
-      const lib = require("./lib.js");
-      //video to audio converter--from user video input
-      const fileSelector = document.getElementById("file-selector");
-      fileSelector.addEventListener("change", (event) => {
-        const fileList = event.target.files;
-        // console.log(fileList);
-        let fileName = fileList[0].name;
-        lib.getAudio(fileName, function (err) {
-          /*error call back function migrate to the function declaration */
+      //inner import lecture button
+      let button_submit = document.querySelector("#submit");
+      button_submit.addEventListener("click", () => {
+        // 1. Read the text in #course-input.
+
+        let input_course = document.querySelector("#course-name");
+        let input_name = document.querySelector("#lecture-name");
+        let input_week = document.querySelector("#week");
+        let input_due = document.querySelector("#date");
+
+        let course = input_course.value;
+        let name = input_name.value;
+        let due = input_due.value;
+        let week = input_week.value;
+
+        let lecture = {
+          Name: name,
+          Due: due,
+          Week: week,
+          Summary: "none",
+        };
+        // 3. Append the new course object to courses
+        let target_idx = courses.findIndex((element) => element === course);
+        if (target_idx !== -1) {
+          courses[target_idx].lectures.push(course);
+          saveCourses();
+          // 4. Create a new task item and attach it to #todo-list.
+          //TODO
+          addCourse(course);
+        }
+
+        console.log(course);
+        console.log(name);
+        console.log(week);
+        console.log(due);
+
+        // 5. Clear #input.
+        input_course.value = "";
+        input_name.value = "";
+        input_due.value = "";
+        input_week.value = "";
+
+        //more functions needed
+        const lib = require("./lib.js");
+        //video to audio converter--from user video input
+        const fileSelector = document.getElementById("file-selector");
+        fileSelector.addEventListener("change", (event) => {
+          const fileList = event.target.files;
+          // console.log(fileList);
+          let fileName = fileList[0].name;
+          lib.getAudio(fileName, function (err) {
+            /*error call back function migrate to the function declaration */
+          });
         });
       });
 
