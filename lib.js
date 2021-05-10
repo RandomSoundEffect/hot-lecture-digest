@@ -5,28 +5,7 @@ const ffmpegPath = require("@ffmpeg-installer/ffmpeg").path;
 const ffmpeg = require("fluent-ffmpeg");
 
 //1. Retrieve data upon start using folders -- in main
-// function initializeAndSaveData(dataObj) {
-//   //local storage
 
-//   function loadData() {
-//     let lastItem = localStorage.getItem("dataObj");
-//     if (!lastItem) return;
-
-//     dataObj = JSON.parse(lastTasks);
-//     dataObj.forEach(addToList);
-//   }
-//   function saveTasks() {
-//     localStorage.setItem("dataObj", JSON.stringify(dataObj));
-//     return null;
-//   }
-
-//   function addToList(obj) {}
-
-//   window.addEventListener("load", () => {
-//     loadData(dataObj);
-//   });
-//   window.onbeforeunload = saveTasks;
-// }
 //2. Video file import button
 
 //2-1. file open
@@ -94,12 +73,9 @@ function getAudio(callback) {
   // console.log(src);
 }
 
-//3. Summary/ Full-text change button
 
-//4. Display the text that matches the type of current state (Summary / Full-text)
-
-//5. Class add/delete function
 
 //6. Program exit function
+// using electron -- no need to handle
 
 module.exports = { getAudio };
