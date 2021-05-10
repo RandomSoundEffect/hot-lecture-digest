@@ -68,6 +68,10 @@ function addCourse(course) {
 
 // Called when course is clicked by user.
 function updateLectures(course) {
+  // empty inner html
+  let list = document.querySelector("#lecture-list");
+  list.innerHTML = "";
+
   // Set lecture name
   let name = document.querySelector("#lecture-name");
   name.innerHTML = course.text + " Lectures";
@@ -131,3 +135,13 @@ button.addEventListener("click", () => {
   // 5. Clear #task-input.
   input.value = "";
 });
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+function validateForm() {}
