@@ -1,24 +1,20 @@
-const lib = require("./lib");
+//const lib = require("./lib");
 
-lib.getAudio(function (err) {
-  /* on function declaration */
-});
-const Type = {
-  Todo: 1,
-  Done: 2,
-};
+// lib.getAudio(function (err) {
+//   /* on function declaration */
+// });
 
-const Lecture = {
-  name: "",
-  week: 0,
-  summary: "sth",
-  due: "",
-};
+// const Lecture = {
+//   name: "",
+//   week: 0,
+//   summary: "sth",
+//   due: "",
+// };
 
-let course = {
-  text: text,
-  lectures: Lecture,
-};
+// let course = {
+//   text: text,
+//   lectures: Lecture,
+// };
 
 function lectureInit() {} //get user input
 
@@ -34,7 +30,7 @@ function loadCourses() {
   if (!lastCourses) return;
 
   courses = JSON.parse(lastCourses);
-  Courses.forEach(addCourse);
+  courses.forEach(addCourse);
 }
 
 function saveCourses() {
@@ -101,7 +97,6 @@ function updateLectures(course) {
     `;
     div.appendChild(courseDiv);
   });
-  let list = document.querySelector("#lecture-list");
   list.appendChild(div);
 }
 
@@ -118,6 +113,10 @@ button.addEventListener("click", () => {
 
   if (!text.length) return;
 
+  let course = {
+    text: text,
+    lectures: [], // list of lectures
+  };
   // 3. Append the new course object to courses
   courses.push(course);
   saveCourses();
