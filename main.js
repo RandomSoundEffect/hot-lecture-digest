@@ -1,24 +1,40 @@
-//const lib = require("./lib");
+const lib = require("./lib.js");
 
-// lib.getAudio(function (err) {
-//   /* on function declaration */
-// });
-
-// const Lecture = {
-//   name: "",
-//   week: 0,
-//   summary: "sth",
-//   due: "",
-// };
-
-// let course = {
-//   text: text,
-//   lectures: Lecture,
-// };
-
-function lectureInit() {} //get user input
+//define datatypes
+const Course = {
+  Name: (lectureName = ""),
+  Professor: (professorName = ""),
+  LectureList: { Week: (lectureList = []) },
+};
+const Lecture = {
+  Due: "",
+  Week: 0,
+  Summary: "sth",
+};
 
 let courses = [];
+
+function lectureInit() {
+  // 1. Read the text in #course-input.
+  let input = document.querySelector("#course-input");
+  let text = input.value;
+
+  if (!text.length) return;
+
+  let course = {
+    text: text,
+    lectures: [], // list of lectures
+  };
+  // 3. Append the new course object to courses
+  courses.push(course);
+  saveCourses();
+
+  // 4. Create a new task item and attach it to #todo-list.
+  addCourse(course);
+
+  // 5. Clear #task-input.
+  input.value = "";
+} //get user input
 
 function addCourse(course) {
   courses.push(course);
@@ -37,6 +53,7 @@ function saveCourses() {
   localStorage.setItem("courses", JSON.stringify(courses));
 }
 
+// Class add/delete function
 function addCourse(course) {
   let div = document.createElement("div");
   div.className = "row";
@@ -138,8 +155,17 @@ function closeForm() {
   document.getElementById("myForm").style.display = "none";
 }
 
+//video to audio converter--from user video input
+const fileSelector = document.getElementById("file-selector");
+fileSelector.addEventListener("change", (event) => {
+  const fileList = event.target.files;
+  // console.log(fileList);
+  let fileName = fileList[0].name;
+  lib.getAudio(fileName, function (err) {
+    /*error call back function migrate to the function declaration */
+  });
+});
+
 //3. Summary/ Full-text change button
 
 //4. Display the text that matches the type of current state (Summary / Full-text)
-
-//5. Class add/delete function

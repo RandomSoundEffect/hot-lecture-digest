@@ -72,7 +72,7 @@
 
                     <div class="form-popup" id="myForm">
                       <form action="/action_page.php" class="form-container">
-                        <label for="name"><b>Name</b></label>
+                        <label for="name"><b>Lecture Name</b></label>
                         <input
                           type="text"
                           placeholder="Enter lecture name..."
@@ -91,11 +91,17 @@
                           required
                         />
 
-                        <label for="file"><b>Video Import</b></label>
-                        <input type="file" id="file" required />
+                        <label for="file"><b>Lecture Video Import</b></label>
+                        <!-- Limit the types of files user can select added -->
+                        <input
+                          type="file"
+                          id="file-selector"
+                          accept=".mp4"
+                          required
+                        />
 
                         <hr />
-                        <button type="submit" class="btn">Import</button>
+                        <button type="submit" class="btn">Confirm</button>
                         <button
                           type="button"
                           class="btn cancel"
@@ -132,6 +138,7 @@
         </div>
       </div>
     </div>
-    <script src="main.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <script type="text/javascript" src="lib.js"></script>
   </body>
 </html>
