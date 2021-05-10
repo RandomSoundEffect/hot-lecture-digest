@@ -4,7 +4,8 @@
   "description": "2021-Spring OSSP final project | group 5 ",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
   },
   "repository": {
     "type": "git",
@@ -20,14 +21,15 @@
   },
   "homepage": "https://github.com/OSSP-group-5/hot-lecture-digest#readme",
   "devDependencies": {
+    "electron": "^12.0.7",
     "jest": "^26.6.3"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "browserify": "^17.0.0",
+    "electron-require": "^0.3.0",
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
     "path": "^0.12.7"
-  },
-  "browser":{"./"}
+  }
 }
