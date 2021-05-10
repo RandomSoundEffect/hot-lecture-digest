@@ -7,10 +7,21 @@ const Type = {
   Todo: 1,
   Done: 2,
 };
+
+const Lecture = {
+  name: "",
+  week: 0,
+  summary: "sth",
+  due: "",
+};
+
 let course = {
   text: text,
-  lectures: [1, 2, 3, 4],
+  lectures: Lecture,
 };
+
+function lectureInit() {} //get user input
+
 let courses = [];
 
 function addCourse(course) {
@@ -41,15 +52,6 @@ function addCourse(course) {
     updateLectures(course);
   };
   div.appendChild(line);
-
-  // let buttonDone = document.createElement("button");
-  // buttonDone.className = "btn btn-sm btn-success me-1";
-  // buttonDone.innerHTML = '<i class="bi bi-check"></i>';
-  // div.appendChild(buttonDone);
-
-  // buttonDone.addEventListener("click", () => {
-  //   /* TODO */
-  // });
 
   let buttonRemove = document.createElement("button");
   buttonRemove.className = "btn btn-sm btn-danger";
@@ -111,17 +113,6 @@ button.addEventListener("click", () => {
   let text = input.value;
 
   if (!text.length) return;
-
-  /*
-    lectures store the information for each lecture.
-    recommended to save the summary.
-
-    lecture example:
-    name: Gradient Descent
-    week: 7
-    summary: "sth"
-    due date: [DATE]
-*/
 
   // 3. Append the new course object to courses
   courses.push(course);
