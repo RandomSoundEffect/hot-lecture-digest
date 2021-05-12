@@ -84,14 +84,20 @@ function updateLectures(course) {
   // Show lectures
   div = document.createElement("div");
   div.className = "";
-  course.lectures.forEach(() => {
+  course.lectures.forEach((lecture) => {
+    summary_icon = "";
+    if (lecture.summary !== "") {
+      summary_icon =
+        '<button class="btn btn-sm btn-success"><i class="bi bi-check"></i></button>';
+    }
     courseDiv = document.createElement("div");
     courseDiv.innerHTML = `
     <div class="row">
-    <div class="col-sm-3">
-        <h6 class="mb-0">4</h6>
-    </div>
-    <div class="col-sm-9 text-secondary">lecture 4</div>
+      <div class="col-sm-3">
+          <h6 class="mb-0">4</h6>
+      </div>
+      <div class="col-sm-6 text-secondary">lecture 4</div>
+      ${summary_icon}
     </div>
     <hr />
     `;
