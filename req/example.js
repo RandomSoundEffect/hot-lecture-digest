@@ -33,6 +33,9 @@ async function getTranscript(clients, bucket_name, src, language, context) {
   return reqtrans.requestLong(clients.speech, request);
 }
 
+exports.getTranscript = getTranscript;
+
+/*
 function main() {
 
   const src = "PathForYourVideoFileHere";
@@ -62,3 +65,4 @@ function main() {
 }
 
 main();
+*/

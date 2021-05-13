@@ -114,3 +114,16 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# private key folder
+key/*
+!key/putyourprivatekeyhere
+
+# data base
+db/full/*
+!db/full/full_transcription.txt
+db/summary/*
+!db/summary/summary.txt
+
+# debug
+.vscode/*
