@@ -28,10 +28,8 @@
     "@ffmpeg-installer/ffmpeg": "^1.0.20",
     "@google-cloud/speech": "^4.5.0",
     "@google-cloud/storage": "^5.8.5",
-
     "browserify": "^17.0.0",
     "electron-require": "^0.3.0",
-
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
     "path": "^0.12.7"
