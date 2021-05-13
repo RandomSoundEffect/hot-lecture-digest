@@ -104,7 +104,7 @@
                         /> -->
 
                         <label for="file"><b>Video Import</b></label>
-                        <input type="file" id="file" required />
+                        <input type="file" id="file-selector" required />
 
                         <hr />
                         <button
@@ -304,7 +304,27 @@
           Week: week,
           Summary: "none",
         };
+
+        //more functions needed
+        const lib = require("./lib.js");
+        //video to audio converter--from user video input
+        const fileSelector = document.getElementById("file");
+        fileSelector.addEventListener("change", (event) => {
+          const fileList = event.target.files;
+          // console.log(fileList);
+          let fileName = fileList[0].name;
+          lib.getAudio(fileName, function (err) {
+            /*error call back function migrate to the function declaration */
+          });
+          //text file generation
+          let text_to_summarize = "full_text";
+          //make summary
+          lecture = lecture_summarizer(text_to_summarize, lecture);
+        });
+
         // 3. Append the new course object to courses
+        //FYI##########################################################
+        //Data structure: 
         let target_idx = courses.findIndex((element) => element === course);
         if (target_idx !== -1) {
           courses[target_idx].lectures.push(course);
@@ -314,34 +334,68 @@
           addCourse(course);
         }
 
+        //for debugging purpose
         console.log(course);
         console.log(name);
         console.log(week);
         console.log(due);
-
         // 5. Clear #input.
         input_course.value = "";
         input_name.value = "";
         input_due.value = "";
         input_week.value = "";
-
-        //more functions needed
-        const lib = require("./lib.js");
-        //video to audio converter--from user video input
-        const fileSelector = document.getElementById("file-selector");
-        fileSelector.addEventListener("change", (event) => {
-          const fileList = event.target.files;
-          // console.log(fileList);
-          let fileName = fileList[0].name;
-          lib.getAudio(fileName, function (err) {
-            /*error call back function migrate to the function declaration */
-          });
-        });
       });
 
+      //##############################################
+      //summarizing
+      // src = https://www.npmjs.com/package/@trashhalo/node-summarizer#meth
+      function lecture_summarizer(text_to_summarize, lecture) {
+        let SummarizerManager = require("node-summarizer").SummarizerManager;
+
+        //TODO-- get text from video
+        let text_to_summarize =
+          "Boris Johnson has been issued with a county court judgement for allegedly failing to pay a debt.Court records show he was issued with the judgment for a figure of £535.Johnson's spokesman described the judgement against him as vexatious and spurious.The claim relates to an allegation of defamation, the Daily Mail reported.See more stories on Insider's business page.Boris Johnson has been issued with a county court judgement for an lleged unpaid debt.The judgement, revealed by the Private Eye magazine on Wednesday and seen by Insider, shows that the judgement against the UK Prime Minister came last October after failed to pay the debt of £535. Despite the order being issued more than six months ago, it is rated as an unsatisfied record, suggesting that it has not been paif by the prime minister. Johnson's Downing Street residence is listed on the court judgement. It is not clear what the alleged debt relates to, but such judgements are issued when a person or organisation takes action against someone claiming they owe them money and the person does not respond.However, a spokesman for Johnson said they were moving at speed to get this vexatious and spurious claim removed, adding that the courts do have the power to strike down vexatious claims.The Daily Mail reported that the claim came from a woman alleging defamation by the prime minister. Asked if the public should be worried about the prime minister's financial situation, a spokesperson replied you should not be worried, no. The judgement posed awkward questions for the prime minister, whose private financial arrangements have been under significant scrutiny in recent months."; //this is full-text from Google API
+        let number_of_sentences = 3;
+
+        let Summarizer = new SummarizerManager(
+          text_to_summarize,
+          number_of_sentences
+        );
+
+        //summarizing
+
+        Summarizer.getSummaryByRank().then((summary_object) => {
+          // return summary_object.summary;
+          let summary = summary_object.summary;
+
+          // lecture_summary.txt is tentative name, modify on your choice
+          fs = require("fs");
+          // TODO-- change output file name if you make summary text file
+          fs.writeFile("./src/lecture_summary.txt", summary, function (err) {
+            if (err) return console.log(err);
+          });
+          //debug
+          // console.log(summary);
+
+          //save summary the to course objective
+          lecture.summary = summary;
+          return lecture;
+        });
+      }
+      //##############################################
+
+      //tentative functions
       //3. Summary/ Full-text change button
 
       //4. Display the text that matches the type of current state (Summary / Full-text)
+
+      document.addEventListener("keydown", function (e) {
+        if (e.which === 123) {
+          require("remote").getCurrentWindow().toggleDevTools();
+        } else if (e.which === 116) {
+          location.reload();
+        }
+      });
     </script>
   </body>
 </html>
