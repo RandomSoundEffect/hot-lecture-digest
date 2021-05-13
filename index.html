@@ -154,20 +154,126 @@
       </div>
     </div>
     <script>
-      //define datatypes
-      // const Course = {
-      //   Name: (courseName = ""),
-      //   Professor: (professorName = ""),
-      //   LectureList: { Week: (lectures = []) },
-      // };
+      document.addEventListener("keydown", function (e) {
+        if (e.which === 123) {
+          require("remote").getCurrentWindow().toggleDevTools();
+        } else if (e.which === 116) {
+          location.reload();
+        }
+      });
 
       let courses = [];
 
-      // @ what is it?
-      // function addCourse(course) {
-      //   courses.push(course);
-      // }
-      //
+      // Add a class to the class list.
+      let button = document.querySelector("#add");
+      button.addEventListener("click", () => {
+        // 1. Read the text in #course-input.
+        let input = document.querySelector("#course-input");
+        let text = input.value;
+
+        if (!text.length) return;
+
+        let course = {
+          text: text,
+          lectures: [], // list of lectures
+        };
+        // 3. Append the new course object to courses
+        courses.push(course);
+        saveCourses();
+
+        // 4. Create a new task item and attach it to #todo-list.
+        addCourse(course);
+
+        // 5. Clear #task-input.
+        input.value = "";
+      });
+
+      //inner import lecture button
+      let button_submit = document.querySelector("#submit");
+      button_submit.addEventListener("click", () => {
+        // 1. Read the text in #course-input.
+
+        let input_course = document.querySelector("#course-name");
+        let input_name = document.querySelector("#lecture-name");
+        let input_week = document.querySelector("#week");
+        let input_due = document.querySelector("#date");
+
+        let course = input_course.value;
+        let name = input_name.value;
+        let due = input_due.value;
+        let week = input_week.value;
+
+        let lecture = {
+          Name: name,
+          Due: due,
+          Week: week,
+          Summary: "none",
+        };
+
+        //######################################### asynchronous problem
+        //############################################## sumamrize 추가분입니다
+        //text file generation
+        let text_to_summarize = "full_text";
+        //make summary
+        //!!problem: function returns undefined
+        //So, access to summary via file
+
+        lecture_summarizer(text_to_summarize)
+          .then(() => {
+            console.log("created");
+            let fs = require("fs");
+            let path = require("path"),
+              filePath = path.join(__dirname, "/src/lecture_summary.txt");
+            var text = fs.readFileSync(filePath, "utf8");
+
+            lecture.Summary = text;
+
+            //debugging purpose
+            console.log("first then: ", lecture.Summary);
+          })
+          .then(() => {
+            // 3. Append the new course object to courses
+            let target_idx = courses.findIndex((element) => element === course);
+            if (target_idx !== -1) {
+              courses[target_idx].lectures.push(course);
+              saveCourses();
+              // 4. Create a new task item and attach it to #todo-list.
+              //TODO
+              addCourse(course);
+            }
+
+            //for debugging purpose
+            console.log(course);
+            console.log(name);
+            console.log(week);
+            console.log(due);
+            // 5. Clear #input.
+            input_course.value = "";
+            input_name.value = "";
+            input_due.value = "";
+            input_week.value = "";
+          });
+
+        //FYI##########################################################
+        //Data structure: courses -> course -> course.Lectures -> lecture
+        // lecture object에 있는 값들을 바탕으로 front-end에서 보일 수 있도록 구현해주세요!!!
+        //##########################################################
+
+        //#############################################파일 change 이벤트에 대한 로직은 찬원님의 branch를 따라야 합니다. 현재 이 파일은 로직에 오류가 있습니다.
+
+        //more functions needed
+        // const lib = require("./lib.js");
+        // //video to audio converter--from user video input
+        // const fileSelector = document.getElementById("file");
+        // fileSelector.addEventListener("change", (event) => {
+        //   const fileList = event.target.files;
+        //   // console.log(fileList);
+        //   let fileName = fileList[0].name;
+        //   lib.getAudio(fileName, function (err) {
+        //     /*error call back function migrate to the function declaration */
+        //   });
+        // });
+      });
 
       function loadCourses() {
         let lastCourses = localStorage.getItem("courses");
@@ -248,31 +354,6 @@
       window.addEventListener("load", () => {
         loadCourses();
       });
-
-      // Add a class to the class list.
-      let button = document.querySelector("#add");
-      button.addEventListener("click", () => {
-        // 1. Read the text in #course-input.
-        let input = document.querySelector("#course-input");
-        let text = input.value;
-
-        if (!text.length) return;
-
-        let course = {
-          text: text,
-          lectures: [], // list of lectures
-        };
-        // 3. Append the new course object to courses
-        courses.push(course);
-        saveCourses();
-
-        // 4. Create a new task item and attach it to #todo-list.
-        addCourse(course);
-
-        // 5. Clear #task-input.
-        input.value = "";
-      });
-
       //open popup
       function openForm() {
         document.getElementById("myForm").style.display = "block";
@@ -283,79 +364,17 @@
         document.getElementById("myForm").style.display = "none";
       }
 
-      //inner import lecture button
-      let button_submit = document.querySelector("#submit");
-      button_submit.addEventListener("click", () => {
-        // 1. Read the text in #course-input.
-
-        let input_course = document.querySelector("#course-name");
-        let input_name = document.querySelector("#lecture-name");
-        let input_week = document.querySelector("#week");
-        let input_due = document.querySelector("#date");
-
-        let course = input_course.value;
-        let name = input_name.value;
-        let due = input_due.value;
-        let week = input_week.value;
-
-        let lecture = {
-          Name: name,
-          Due: due,
-          Week: week,
-          Summary: "none",
-        };
-
-        //more functions needed
-        const lib = require("./lib.js");
-        //video to audio converter--from user video input
-        const fileSelector = document.getElementById("file");
-        fileSelector.addEventListener("change", (event) => {
-          const fileList = event.target.files;
-          // console.log(fileList);
-          let fileName = fileList[0].name;
-          lib.getAudio(fileName, function (err) {
-            /*error call back function migrate to the function declaration */
-          });
-          //text file generation
-          let text_to_summarize = "full_text";
-          //make summary
-          lecture = lecture_summarizer(text_to_summarize, lecture);
-        });
-
-        // 3. Append the new course object to courses
-        //FYI##########################################################
-        //Data structure: 
-        let target_idx = courses.findIndex((element) => element === course);
-        if (target_idx !== -1) {
-          courses[target_idx].lectures.push(course);
-          saveCourses();
-          // 4. Create a new task item and attach it to #todo-list.
-          //TODO
-          addCourse(course);
-        }
-
-        //for debugging purpose
-        console.log(course);
-        console.log(name);
-        console.log(week);
-        console.log(due);
-        // 5. Clear #input.
-        input_course.value = "";
-        input_name.value = "";
-        input_due.value = "";
-        input_week.value = "";
-      });
-
-      //##############################################
+      //########################################################################
+      //##############################################submit button에서 사용하는 summarize function 입력 값을 반영하도록 바꿀 필요가 있습니다.
       //summarizing
       // src = https://www.npmjs.com/package/@trashhalo/node-summarizer#meth
-      function lecture_summarizer(text_to_summarize, lecture) {
+      async function lecture_summarizer(text_to_summarize) {
         let SummarizerManager = require("node-summarizer").SummarizerManager;
 
         //TODO-- get text from video
         let text_to_summarize =
           "Boris Johnson has been issued with a county court judgement for allegedly failing to pay a debt.Court records show he was issued with the judgment for a figure of £535.Johnson's spokesman described the judgement against him as vexatious and spurious.The claim relates to an allegation of defamation, the Daily Mail reported.See more stories on Insider's business page.Boris Johnson has been issued with a county court judgement for an lleged unpaid debt.The judgement, revealed by the Private Eye magazine on Wednesday and seen by Insider, shows that the judgement against the UK Prime Minister came last October after failed to pay the debt of £535. Despite the order being issued more than six months ago, it is rated as an unsatisfied record, suggesting that it has not been paif by the prime minister. Johnson's Downing Street residence is listed on the court judgement. It is not clear what the alleged debt relates to, but such judgements are issued when a person or organisation takes action against someone claiming they owe them money and the person does not respond.However, a spokesman for Johnson said they were moving at speed to get this vexatious and spurious claim removed, adding that the courts do have the power to strike down vexatious claims.The Daily Mail reported that the claim came from a woman alleging defamation by the prime minister. Asked if the public should be worried about the prime minister's financial situation, a spokesperson replied you should not be worried, no. The judgement posed awkward questions for the prime minister, whose private financial arrangements have been under significant scrutiny in recent months."; //this is full-text from Google API
-        let number_of_sentences = 3;
+        let number_of_sentences = 3; //output lines
 
         let Summarizer = new SummarizerManager(
           text_to_summarize,
@@ -371,15 +390,15 @@
           // lecture_summary.txt is tentative name, modify on your choice
           fs = require("fs");
           // TODO-- change output file name if you make summary text file
-          fs.writeFile("./src/lecture_summary.txt", summary, function (err) {
-            if (err) return console.log(err);
-          });
+          fs.writeFileSync(
+            "./src/lecture_summary.txt",
+            summary,
+            function (err) {
+              if (err) return console.log(err);
+            }
+          );
           //debug
-          // console.log(summary);
-
-          //save summary the to course objective
-          lecture.summary = summary;
-          return lecture;
+          console.log(summary);
         });
       }
       //##############################################
@@ -388,14 +407,6 @@
       //3. Summary/ Full-text change button
 
       //4. Display the text that matches the type of current state (Summary / Full-text)
-
-      document.addEventListener("keydown", function (e) {
-        if (e.which === 123) {
-          require("remote").getCurrentWindow().toggleDevTools();
-        } else if (e.which === 116) {
-          location.reload();
-        }
-      });
     </script>
   </body>
 </html>
