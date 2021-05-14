@@ -43,6 +43,14 @@
                     id="course-input"
                     placeholder="Enter a course here"
                   />
+                </div>
+                <div class="d-flex align-items-center mb-2 mt-2">
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Professor..."
+                    id="professor"
+                  />
                   <button
                     type="button"
                     id="add"
@@ -107,12 +115,7 @@
                         <input type="file" id="file-selector" required />
 
                         <hr />
-                        <button
-                          type="button"
-                          class="btn"
-                          id="submit"
-                          onclick="closeForm()"
-                        >
+                        <button type="button" class="btn" id="submit">
                           Submit
                         </button>
                         <button
@@ -139,12 +142,14 @@
                     <h6 class="d-flex align-items-center mb-3">
                       Your week is here:
                     </h6>
-                    Pan-searing is the best way to cook a steak, and it's also
-                    the easiest! I love the kind of dinner that you can cook
-                    without a recipe. The truth is, good cooking is more about
-                    technique than recipes and the best dishes are often the
-                    simplest to prepare. A properly cooked steak is case in
-                    point.
+                    <div class="" id="summary">
+                      summ Pan-searing is the best way to cook a steak, and it's
+                      also the easiest! I love the kind of dinner that you can
+                      cook without a recipe. The truth is, good cooking is more
+                      about technique than recipes and the best dishes are often
+                      the simplest to prepare. A properly cooked steak is case
+                      in point.
+                    </div>
                   </div>
                 </div>
               </div>
@@ -322,6 +327,15 @@
         list.appendChild(div);
       }
 
+      // Called when lecture is clicked by user
+      function updateSummary(lecture) {
+        let summary = document.querySelector("#summary");
+        summary.innerHTML =
+          lecture.Summary === "none"
+            ? "Not summarized yet..."
+            : lecture.Summary;
+      }
+
       // Called when course is clicked by user.
       function updateLectures(course) {
         // empty inner html
@@ -335,18 +349,25 @@
         // Show lectures
         div = document.createElement("div");
         div.className = "";
-        course.lectures.forEach(() => {
-          courseDiv = document.createElement("div");
-          courseDiv.innerHTML = `
+        course.lectures.forEach((lecture) => {
+          summary_icon = "";
+          if (lecture.summary !== "") {
+            summary_icon =
+              '<button class="btn btn-sm btn-success"><i class="bi bi-check"></i></button>';
+          }
+          lectureDiv = document.createElement("div");
+          lectureDiv.onclick = () => updateSummary(lecture);
+          lectureDiv.innerHTML = `
           <div class="row">
-          <div class="col-sm-3">
-              <h6 class="mb-0">4</h6>
-          </div>
-          <div class="col-sm-9 text-secondary">lecture 4</div>
+            <div class="col-sm-3">
+                <h6 class="mb-0">4</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">lecture 4</div>
+            ${summary_icon}
           </div>
           <hr />
           `;
-          div.appendChild(courseDiv);
+          div.appendChild(lectureDiv);
         });
         list.appendChild(div);
       }
@@ -372,7 +393,7 @@
         let SummarizerManager = require("node-summarizer").SummarizerManager;
 
         //TODO-- get text from video
-        let text_to_summarize =
+        text_to_summarize =
           "Boris Johnson has been issued with a county court judgement for allegedly failing to pay a debt.Court records show he was issued with the judgment for a figure of £535.Johnson's spokesman described the judgement against him as vexatious and spurious.The claim relates to an allegation of defamation, the Daily Mail reported.See more stories on Insider's business page.Boris Johnson has been issued with a county court judgement for an lleged unpaid debt.The judgement, revealed by the Private Eye magazine on Wednesday and seen by Insider, shows that the judgement against the UK Prime Minister came last October after failed to pay the debt of £535. Despite the order being issued more than six months ago, it is rated as an unsatisfied record, suggesting that it has not been paif by the prime minister. Johnson's Downing Street residence is listed on the court judgement. It is not clear what the alleged debt relates to, but such judgements are issued when a person or organisation takes action against someone claiming they owe them money and the person does not respond.However, a spokesman for Johnson said they were moving at speed to get this vexatious and spurious claim removed, adding that the courts do have the power to strike down vexatious claims.The Daily Mail reported that the claim came from a woman alleging defamation by the prime minister. Asked if the public should be worried about the prime minister's financial situation, a spokesperson replied you should not be worried, no. The judgement posed awkward questions for the prime minister, whose private financial arrangements have been under significant scrutiny in recent months."; //this is full-text from Google API
         let number_of_sentences = 3; //output lines
 
