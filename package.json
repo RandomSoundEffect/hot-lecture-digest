@@ -34,6 +34,7 @@
     "express-handlebars": "^5.3.2",
     "ffmpeg": "^0.0.4",
     "fluent-ffmpeg": "^2.1.2",
+    "node-summarizer": "^1.0.7",
     "path": "^0.12.7"
   }
 }
