@@ -6,6 +6,9 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
   <link rel="stylesheet" href="custom.css" />
+
+  <script defer src="render.js"></script>
+
 </head>
 
 <body>
@@ -29,8 +32,13 @@
         <div class="col-md-4 mb-3">
           <div class="card">
             <div class="card-body">
-              <h6 class="d-flex align-items-center mb-3">My Classes</h6>
-              <div id="course-list"></div>
+              <h4 class="d-flex align-items-center mb-3">My Classes</h4>
+              <table id="course-list" class="table table-hover">
+                <tbody id="course-list-body">
+                  <!-- COURSE LIST -->
+
+                </tbody>
+              </table>
               <div class="d-flex align-items-center mb-2 mt-2">
                 <input type="text" class="form-control" id="course-input" placeholder="Enter a course here" />
                 <button type="button" id="add" class="btn btn-primary ms-1 text-nowrap">
@@ -43,14 +51,27 @@
         <div class="col-md-8">
           <div class="card mb-3">
             <div class="card-body">
-              <h6 class="d-flex align-items-center mb-3" id="courses">
+              <h4 class="d-flex align-items-center mb-3" id="courses">
                 Lectures
-              </h6>
-              <div id="lecture-list"></div>
+              </h4>
+              <table id="lecture-list" class="table table-hover">
+                <thead>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Due</th>
+                </thead>
+                <tbody id="lecture-list-body">
+                  <!-- LECTURE LIST -->
+                </tbody>
+              </table>
               <div class="row">
                 <div class="ml-auto">
-                  <button class="btn btn-outline-primary" onclick="openForm()">
+                  <button id="import" class="btn btn-outline-primary">
                     Import
+                  </button>
+
+                  <button id="summarize" class="btn btn-outline-primary">
+                    Summarize
                   </button>
 
                   <div class="form-popup" id="myForm">
@@ -74,22 +95,20 @@
                           id="professor"
                         /> -->
 
-                      <label for="file"><b>Video Import</b></label>
-                      <input type="file" id="file" required />
+                      <label for="file"><b>Full-Transcription</b></label>
+                      <input type="file" id="full-trans-file" required />
+                      <label for="file"><b>Summary</b></label>
+                      <input type="file" id="summary-file" required />
 
                       <hr />
-                      <button type="button" class="btn" id="submit" onclick="closeForm()">
+                      <button type="button" class="btn" id="submit">
                         Submit
                       </button>
-                      <button type="button" class="btn cancel" onclick="closeForm()">
+                      <button type="button" class="btn cancel" id="close">
                         Close
                       </button>
                     </form>
                   </div>
-
-                  <button id="summarize" class="btn btn-outline-primary">
-                    Summarize
-                  </button>
                 </div>
               </div>
             </div>
@@ -101,12 +120,9 @@
                   <h6 class="d-flex align-items-center mb-3">
                     Your week is here:
                   </h6>
-                  Pan-searing is the best way to cook a steak, and it's also
-                  the easiest! I love the kind of dinner that you can cook
-                  without a recipe. The truth is, good cooking is more about
-                  technique than recipes and the best dishes are often the
-                  simplest to prepare. A properly cooked steak is case in
-                  point.
+                  <div id="lecture-content">
+
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,216 +131,6 @@
       </div>
     </div>
   </div>
-  <script>
-    //define datatypes
-    // const Course = {
-    //   Name: (courseName = ""),
-    //   Professor: (professorName = ""),
-    //   LectureList: { Week: (lectures = []) },
-    // };
-
-    let courses = [];
-
-    // @ what is it?
-    // function addCourse(course) {
-    //   courses.push(course);
-    // }
-    //
-
-    function loadCourses() {
-      let lastCourses = localStorage.getItem("courses");
-      if (!lastCourses) return;
-
-      courses = JSON.parse(lastCourses);
-      courses.forEach(addCourse);
-    }
-
-    function saveCourses() {
-      localStorage.setItem("courses", JSON.stringify(courses));
-    }
-
-    // Class add/delete function
-    function addCourse(course) {
-      let div = document.createElement("div");
-      div.className = "row";
-
-      let line = document.createElement("div");
-      line.className = "col-sm-9";
-      line.textContent = course.text;
-      line.onclick = function () {
-        updateLectures(course);
-      };
-      div.appendChild(line);
-
-      let buttonRemove = document.createElement("button");
-      buttonRemove.className = "btn btn-sm btn-danger";
-      buttonRemove.innerHTML = '<i class="bi bi-file-minus"></i>';
-      div.appendChild(buttonRemove);
-
-      buttonRemove.addEventListener("click", () => {
-        div.remove();
-        courses = courses.filter((t) => t !== course);
-        saveCourses();
-      });
-
-      let list = document.querySelector("#course-list");
-
-      let hr = document.createElement("hr");
-      let hrdiv = document.createElement("div");
-      hrdiv.className = "col-sm-9";
-      hrdiv.appendChild(hr);
-      div.appendChild(hrdiv);
-
-      list.appendChild(div);
-    }
-
-    // Called when course is clicked by user.
-    function updateLectures(course) {
-      // empty inner html
-      let list = document.querySelector("#lecture-list");
-      list.innerHTML = "";
-
-      // Set lecture name
-      let name = document.querySelector("#lecture-name");
-      name.innerHTML = course.text + " Lectures";
-
-      // Show lectures
-      div = document.createElement("div");
-      div.className = "";
-      course.lectures.forEach(() => {
-        courseDiv = document.createElement("div");
-        courseDiv.innerHTML = `
-          <div class="row">
-          <div class="col-sm-3">
-              <h6 class="mb-0">4</h6>
-          </div>
-          <div class="col-sm-9 text-secondary">lecture 4</div>
-          </div>
-          <hr />
-          `;
-        div.appendChild(courseDiv);
-      });
-      list.appendChild(div);
-    }
-
-    window.addEventListener("load", () => {
-      loadCourses();
-    });
-
-    // Add a class to the class list.
-    let button = document.querySelector("#add");
-    button.addEventListener("click", () => {
-      // 1. Read the text in #course-input.
-      let input = document.querySelector("#course-input");
-      let text = input.value;
-
-      if (!text.length) return;
-
-      let course = {
-        text: text,
-        lectures: [], // list of lectures
-      };
-      // 3. Append the new course object to courses
-      courses.push(course);
-      saveCourses();
-
-      // 4. Create a new task item and attach it to #todo-list.
-      addCourse(course);
-
-      // 5. Clear #task-input.
-      input.value = "";
-    });
-
-    //open popup
-    function openForm() {
-      document.getElementById("myForm").style.display = "block";
-    }
-
-    //close popup
-    function closeForm() {
-      document.getElementById("myForm").style.display = "none";
-    }
-
-
-
-    /*---------------------------------------------------------------*/
-    
-    const speech = require("@google-cloud/speech");
-    const { Storage } = require("@google-cloud/storage");
-    const fsPromises = reuqire("fs/promises");
-    const path = require("path");
-    const trans = require("./req/example.js");
-
-    let filepath = null;
-    const fileSelector = document.getElementById("file");
-    fileSelector.addEventListener("change", (event) => {
-      filepath = event.target.files[0].path;
-    });
-
-    
-    
-    const options = { // credentials
-      keyFilename: "./key/private_key.json"
-    }
-
-    const bucket_name = "speech_to_text_bucket_rfx";
-
-    const sp = new speech.SpeechClient(options);
-    const st = new Storage(options);
-
-    const clients = {
-      speech: sp,
-      storage: st
-    };
-
-    //inner import lecture button
-    let button_submit = document.querySelector("#submit");
-    button_submit.addEventListener("click", async () => {
-      // 1. Read the text in #course-input.
-
-      let input_course = document.querySelector("#course-name");
-      let input_name = document.querySelector("#lecture-name");
-      let input_week = document.querySelector("#week");
-      let input_due = document.querySelector("#date");
-
-      let course = input_course.value;
-      let name = input_name.value;
-      let due = input_due.value;
-      let week = input_week.value;
-
-      let lecture = {
-        Name: name,
-        Due: due,
-        Week: week,
-        Summary: "none",
-      };
-      // 3. Append the new course object to courses
-      let target_idx = courses.findIndex((element) => element === course);
-      if (target_idx !== -1) {
-        courses[target_idx].lectures.push(course);
-        saveCourses();
-        // 4. Create a new task item and attach it to #todo-list.
-        //TODO
-        addCourse(course);
-      }
-
-      // 5. Clear #input.
-      input_course.value = "";
-      input_name.value = "";
-      input_due.value = "";
-      input_week.value = "";
-
-      // gets transcript
-      transcription = await trans.getTranscript(clients, bucket_name, filepath, "en-US");
-      const out = path.parse(filepath).name + ".txt";
-      const fileHandle = await fsPromises.open("./db/" + out, "w");
-      await fileHandle.writeFile(res);
-    });
-
-      //3. Summary/ Full-text change button
-
-      //4. Display the text that matches the type of current state (Summary / Full-text)
-  </script>
 </body>
 
 </html>
