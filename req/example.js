@@ -5,7 +5,7 @@ const reqtrans = require("./reqtrans.js");
 const storage = require("./storage.js")
 const audio = require("./audio.js");
 
-const fs = require("./fs");
+const fs = require("fs");
 
 // example function
 // you must set up Google Service Account, API, and Google storage bucket beforehand at this point in time.
