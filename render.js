@@ -213,11 +213,8 @@ function displayLectureContent(lecture) {
 async function readText(file) {
   return new Promise((resolve, reject) => {
     let reader = new FileReader();
-    reader.onload = () => {
-      resolve(reader.result);
-    };
+    reader.onload = () => resolve(reader.result);
     reader.onerror = reject;
-
     reader.readAsText(file);
   });
 }

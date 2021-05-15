@@ -1,15 +1,13 @@
-const speech = require("@google-cloud/speech");
-const { Storage } = require("@google-cloud/storage");
-
 const reqtrans = require("./reqtrans.js");
 const storage = require("./storage.js")
 const audio = require("./audio.js");
 
 const fs = require("fs");
 
-// example function
-// you must set up Google Service Account, API, and Google storage bucket beforehand at this point in time.
-
+/** 
+ * Get a transcription file from cloud
+ * you must set up Google Service Account, API, and Google storage bucket beforehand at this point in time.
+ */
 async function getTranscript(clients, bucket_name, src, language, context) {
 
   /* STEP 1: Get a temporary audio from video */

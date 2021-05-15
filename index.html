@@ -40,7 +40,7 @@
                 </tbody>
               </table>
               <div class="d-flex align-items-center mb-2 mt-2">
-                <input type="text" class="form-control" placeholder="Enter Professor..." id="professor" />
+                <input type="text" class="form-control" id="course-input" placeholder="Enter a course here" />
                 <button type="button" id="add" class="btn btn-primary ms-1 text-nowrap">
                   <i class="bi bi-plus"></i> Add
                 </button>
@@ -62,6 +62,7 @@
                 </thead>
                 <tbody id="lecture-list-body">
                   <!-- LECTURE LIST -->
+
                 </tbody>
               </table>
               <div class="row">
@@ -86,14 +87,6 @@
 
                       <label for="date"><b>Due Date</b></label>
                       <input type="date" id="date" />
-
-                      <!-- move professor property to add class section -->
-                      <!-- <label for="professor"><b>Professor</b></label>
-                        <input
-                          type="text"
-                          placeholder="Enter Professor..."
-                          id="professor"
-                        /> -->
 
                       <label for="file"><b>Full-Transcription</b></label>
                       <input type="file" id="full-trans-file" required />
@@ -130,49 +123,7 @@
         </div>
       </div>
     </div>
-    <script>
-      //########################################################################
-      //##############################################submit button에서 사용하는 summarize function 입력 값을 반영하도록 바꿀 필요가 있습니다.
-      //summarizing
-      // src = https://www.npmjs.com/package/@trashhalo/node-summarizer#meth
-      async function lecture_summarizer(text_to_summarize) {
-        let SummarizerManager = require("node-summarizer").SummarizerManager;
-
-        //TODO-- get text from video
-        text_to_summarize =
-          "Boris Johnson has been issued with a county court judgement for allegedly failing to pay a debt.Court records show he was issued with the judgment for a figure of £535.Johnson's spokesman described the judgement against him as vexatious and spurious.The claim relates to an allegation of defamation, the Daily Mail reported.See more stories on Insider's business page.Boris Johnson has been issued with a county court judgement for an lleged unpaid debt.The judgement, revealed by the Private Eye magazine on Wednesday and seen by Insider, shows that the judgement against the UK Prime Minister came last October after failed to pay the debt of £535. Despite the order being issued more than six months ago, it is rated as an unsatisfied record, suggesting that it has not been paif by the prime minister. Johnson's Downing Street residence is listed on the court judgement. It is not clear what the alleged debt relates to, but such judgements are issued when a person or organisation takes action against someone claiming they owe them money and the person does not respond.However, a spokesman for Johnson said they were moving at speed to get this vexatious and spurious claim removed, adding that the courts do have the power to strike down vexatious claims.The Daily Mail reported that the claim came from a woman alleging defamation by the prime minister. Asked if the public should be worried about the prime minister's financial situation, a spokesperson replied you should not be worried, no. The judgement posed awkward questions for the prime minister, whose private financial arrangements have been under significant scrutiny in recent months."; //this is full-text from Google API
-        let number_of_sentences = 3; //output lines
-
-        let Summarizer = new SummarizerManager(
-          text_to_summarize,
-          number_of_sentences
-        );
-
-        //summarizing
-
-        Summarizer.getSummaryByRank().then((summary_object) => {
-          // return summary_object.summary;
-          let summary = summary_object.summary;
-
-          // lecture_summary.txt is tentative name, modify on your choice
-          fs = require("fs");
-          // TODO-- change output file name if you make summary text file
-          fs.writeFileSync(
-            "./src/lecture_summary.txt",
-            summary,
-            function (err) {
-              if (err) return console.log(err);
-            }
-          );
-          //debug
-          console.log(summary);
-        });
-      }
-      //##############################################
-
-      //tentative functions
-      //3. Summary/ Full-text change button
-    </script>
+  </div>
 </body>
 
 </html>

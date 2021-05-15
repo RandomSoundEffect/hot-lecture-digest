@@ -116,8 +116,8 @@ dist
 .pnp.*
 
 # private key folder
-key/*
-!key/putyourprivatekeyhere
+gcloud/*
+!gcloud/bucket.txt
 
 # data base
 db/full/*
