@@ -179,11 +179,11 @@ function switchContent(lecture) {
   if (MainScreen.display.content_type === "full") {
     MainScreen.display.content_type = "summary";
     MainScreen.buttons.summarize.className = "btn btn-primary";
-    MainScreen.buttons.summarize.innerHTML = "Full-text";
+    MainScreen.buttons.summarize.innerHTML = "Summarize";
   } else {
     MainScreen.display.content_type = "full";
     MainScreen.buttons.summarize.className = "btn btn-outline-primary";
-    MainScreen.buttons.summarize.innerHTML = "Summarize";
+    MainScreen.buttons.summarize.innerHTML = "Full-text";
   }
   displayLectureContent(lecture);
 }
