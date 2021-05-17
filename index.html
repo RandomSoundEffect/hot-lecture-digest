@@ -43,6 +43,15 @@
                     id="course-input"
                     placeholder="Enter a course here"
                   />
+                </div>
+                <div class="d-flex align-items-center mb-2 mt-2">
+
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder="Enter Professor..."
+                    id="professor-input"
+                  />
                   <button
                     type="button"
                     id="add"
@@ -57,7 +66,7 @@
           <div class="col-md-8">
             <div class="card mb-3">
               <div class="card-body">
-                <h6 class="d-flex align-items-center mb-3" id="courses">
+                <h6 class="d-flex align-items-center mb-3" id="lecture-name">
                   Lectures
                 </h6>
                 <div id="lecture-list"></div>
@@ -229,14 +238,20 @@
         // Show lectures
         div = document.createElement("div");
         div.className = "";
-        course.lectures.forEach(() => {
+        course.lectures.forEach((lecture) => {
+          summary_icon = "";
+          if (lecture.summary !== "") {
+            summary_icon =
+              '<button class="btn btn-sm btn-success"><i class="bi bi-check"></i></button>';
+          }
           courseDiv = document.createElement("div");
           courseDiv.innerHTML = `
           <div class="row">
-          <div class="col-sm-3">
-              <h6 class="mb-0">4</h6>
-          </div>
-          <div class="col-sm-9 text-secondary">lecture 4</div>
+            <div class="col-sm-3">
+                <h6 class="mb-0">4</h6>
+            </div>
+            <div class="col-sm-6 text-secondary">lecture 4</div>
+            ${summary_icon}
           </div>
           <hr />
           `;
@@ -307,7 +322,7 @@
         // 3. Append the new course object to courses
         let target_idx = courses.findIndex((element) => element === course);
         if (target_idx !== -1) {
-          courses[target_idx].lectures.push(course);
+          courses[target_idx].lectures.push(lecture);
           saveCourses();
           // 4. Create a new task item and attach it to #todo-list.
           //TODO
