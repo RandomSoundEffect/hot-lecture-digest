@@ -21,7 +21,6 @@ LECTURE_OBJECT {
 }
 */
 
-
 /////////////////////////////////////////////////////////
 ////////////////////// SAVE & LOAD //////////////////////
 /////////////////////////////////////////////////////////
@@ -31,17 +30,13 @@ function loadCourses() {
   if (!lastCourses) return;
 
   const data = JSON.parse(lastCourses);
-  data.forEach(course => addCourse(course.subject));
+  data.forEach((course) => addCourse(course.subject));
   courses = data;
 }
-
 
 function saveCourses() {
   localStorage.setItem("courses", JSON.stringify(courses));
 }
-
-
-
 
 /////////////////////////////////////////////////////////
 //////////////////////  RENDERING  //////////////////////
@@ -50,40 +45,39 @@ function saveCourses() {
 /** main screen stuff */
 const MainScreen = {
   buttons: {
-    import:    document.getElementById("import"),
+    import: document.getElementById("import"),
     summarize: document.getElementById("summarize"),
-    add:       document.getElementById("add")
+    add: document.getElementById("add"),
   },
   input: {
-    course:    document.getElementById("course-input")
+    course: document.getElementById("course-input"),
   },
   display: {
-    courses:   document.getElementById("course-list-body"),
-    lectures:  document.getElementById("lecture-list-body"),
+    courses: document.getElementById("course-list-body"),
+    lectures: document.getElementById("lecture-list-body"),
     content_type: "full",
-    lecture_content: document.getElementById("lecture-content")
-  }
+    lecture_content: document.getElementById("lecture-content"),
+  },
 };
 
 /** popup screen stuff */
-const Popup = { 
+const Popup = {
   bg: document.getElementById("myForm"),
   input: {
     course: document.getElementById("course-name"),
-    name:   document.getElementById("lecture-name"),
-    week:   document.getElementById("week"),
-    due:    document.getElementById("date")
+    name: document.getElementById("lecture-name"),
+    week: document.getElementById("week"),
+    due: document.getElementById("date"),
   },
   button: {
     submit: document.getElementById("submit"),
-    close:  document.getElementById("close"),
+    close: document.getElementById("close"),
   },
   file: {
     fulltrans: document.getElementById("full-trans-file"),
-    summary:   document.getElementById("summary-file")
-  }
+    summary: document.getElementById("summary-file"),
+  },
 };
-
 
 /** init static main screen */
 const runMain = () => {
@@ -101,7 +95,6 @@ const runMain = () => {
   });
 
   window.addEventListener("load", loadCourses);
-
 };
 
 /** init static popup screen */
@@ -110,16 +103,12 @@ const runPopup = () => {
   Popup.button.close.addEventListener("click", () => closePopup(true));
 };
 
-
-
-
-
 /////////////////////////////////////////////////////////
 ////////////////  MAIN SCREEN FUNCTIONS  ////////////////
 /////////////////////////////////////////////////////////
 
 function addCourse(subject) {
-  if (!subject.length || courses.find(c => c.subject === subject)) return;
+  if (!subject.length || courses.find((c) => c.subject === subject)) return;
 
   courses.push({ subject, lectures: [] });
   let last = courses.length - 1;
@@ -131,7 +120,9 @@ function addCourse(subject) {
   name.innerHTML = subject;
   name.onclick = () => {
     let childnodes = MainScreen.display.courses.childNodes;
-    childnodes.forEach(r => { r.className = ""; })
+    childnodes.forEach((r) => {
+      r.className = "";
+    });
     row.className = "table-active";
     displayLectures(courses[last]);
   };
@@ -142,7 +133,7 @@ function addCourse(subject) {
   btn_remov.innerHTML = '<i class="bi bi-trash"></i>';
   btn_remov.onclick = () => {
     row.remove();
-    courses = courses.filter(c => c.subject !== subject);
+    courses = courses.filter((c) => c.subject !== subject);
     saveCourses();
   };
   btn.appendChild(btn_remov);
@@ -152,15 +143,15 @@ function addCourse(subject) {
   MainScreen.display.courses.appendChild(row);
 }
 
-
 function displayLectures(course) {
   if (!course.lectures.length) {
-    MainScreen.display.lectures.innerHTML = '<tr><td>-</td><td>No lectures yet.</td><td>-</td></tr>'
+    MainScreen.display.lectures.innerHTML =
+      "<tr><td>-</td><td>No lectures yet.</td><td>-</td></tr>";
     return;
   }
 
   MainScreen.display.lectures.innerHTML = "";
-  course.lectures.forEach(lecture => {
+  course.lectures.forEach((lecture) => {
     let row = document.createElement("tr");
     row.innerHTML = `
     <td>${lecture.Week}</td>
@@ -169,7 +160,7 @@ function displayLectures(course) {
     `;
     row.onclick = () => {
       let childnodes = MainScreen.display.lectures.childNodes;
-      childnodes.forEach(r => r.className = "");
+      childnodes.forEach((r) => (r.className = ""));
       row.className = "table-active";
       displayLectureContent(lecture);
       MainScreen.buttons.summarize.onclick = () => switchContent(lecture);
@@ -178,19 +169,19 @@ function displayLectures(course) {
   });
 }
 
-
 /** switch between full transcription and summary */
 function switchContent(lecture) {
   if (MainScreen.display.content_type === "full") {
     MainScreen.display.content_type = "summary";
     MainScreen.buttons.summarize.className = "btn btn-primary";
+    MainScreen.buttons.summarize.innerHTML = "Full-text";
   } else {
     MainScreen.display.content_type = "full";
     MainScreen.buttons.summarize.className = "btn btn-outline-primary";
+    MainScreen.buttons.summarize.innerHTML = "Summarize";
   }
   displayLectureContent(lecture);
 }
-
 
 /** display lecture content */
 function displayLectureContent(lecture) {
@@ -200,10 +191,6 @@ function displayLectureContent(lecture) {
     MainScreen.display.lecture_content.innerHTML = lecture.Summary;
   }
 }
-
-
-
-
 
 /////////////////////////////////////////////////////////
 /////////////////////  FILE HANDLE  /////////////////////
@@ -219,13 +206,14 @@ async function readText(file) {
   });
 }
 
-
 /////////////////////////////////////////////////////////
 ///////////////////  POPUP FUNCTIONS  ///////////////////
 /////////////////////////////////////////////////////////
 
 async function submit() {
-  const empty_input = Object.keys(Popup.input).some(k => !Popup.input[k].value.length);
+  const empty_input = Object.keys(Popup.input).some(
+    (k) => !Popup.input[k].value.length
+  );
   const file1 = Popup.file.fulltrans.files[0];
   const file2 = Popup.file.summary.files[0];
   if (empty_input || !(file1 && file2)) return;
@@ -235,10 +223,10 @@ async function submit() {
     const res2 = await readText(file2);
 
     const subject = Popup.input.course.value;
-    let target = courses.find(c => c.subject === subject);
+    let target = courses.find((c) => c.subject === subject);
     if (!target) {
       addCourse(subject);
-      target = courses.find(c => c.subject === subject);
+      target = courses.find((c) => c.subject === subject);
     }
 
     target.lectures.push({
@@ -246,7 +234,7 @@ async function submit() {
       Due: Popup.input.due.value,
       Week: Popup.input.week.value,
       Full: res1,
-      Summary: res2
+      Summary: res2,
     });
 
     displayLectures(target);
@@ -256,11 +244,9 @@ async function submit() {
   }
 }
 
-
 function openPopup() {
   Popup.bg.style.display = "block";
 }
-
 
 function closePopup(do_flush) {
   if (do_flush) {
@@ -271,19 +257,9 @@ function closePopup(do_flush) {
   Popup.bg.style.display = "none";
 }
 
-
 function clearInputs(inputs) {
-  Object.keys(inputs).forEach(k => inputs[k].value = "");
+  Object.keys(inputs).forEach((k) => (inputs[k].value = ""));
 }
-
-
-
-
-
-
-
-
-
 
 runMain();
 runPopup();

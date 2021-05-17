@@ -19,3 +19,8 @@
 ## License
 
 ## Code of Conduct
+
+### Things to do
+
+- how to use google API
+- how to use the app
