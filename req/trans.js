@@ -32,35 +32,3 @@ async function getTranscript(clients, bucket_name, src, language, context) {
 }
 
 exports.getTranscript = getTranscript;
-
-/*
-function main() {
-
-  const src = "PathForYourVideoFileHere";
-  const key = "PathForYourJSONprivateKeyHere";
-  const lang_code = "ko-KR"; // or en-US, etc. depending on language
-  const bucket = "NameOfYourStorageBucketHere";
-
-  const options = { // credentials
-    keyFilename: key
-  }
-
-  const sp = new speech.SpeechClient(options); // reuse client as much as possible
-  const st = new Storage(options); // reuse client as much as possible
-
-  const clients = {
-    speech: sp,
-    storage: st
-  };
-
-  getTranscript(clients, bucket, src, lang_code) // calling example function
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.error(err);
-    });
-}
-
-main();
-*/

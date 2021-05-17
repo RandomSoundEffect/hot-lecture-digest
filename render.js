@@ -121,9 +121,7 @@ function addCourse(subject) {
   name.innerHTML = subject;
   name.onclick = () => {
     let childnodes = MainScreen.display.courses.childNodes;
-    childnodes.forEach((r) => {
-      r.className = "";
-    });
+    childnodes.forEach((r) => (r.className = ""));
     row.className = "table-active";
     MainScreen.display.lecture_main_title.innerHTML = `Lectures of ${name.innerHTML}`;
     displayLectures(courses[last]);
@@ -155,7 +153,6 @@ function displayLectures(course) {
   MainScreen.display.lectures.innerHTML = "";
   course.lectures.forEach((lecture) => {
     let row = document.createElement("tr");
-    row.className = "sorting-class";
     row.innerHTML = `
     <td>${lecture.Week}</td>
     <td>${lecture.Name}</td>
@@ -164,26 +161,24 @@ function displayLectures(course) {
     row.onclick = () => {
       let childnodes = MainScreen.display.lectures.childNodes;
       childnodes.forEach((r) => (r.className = ""));
-      row.classList.add = ("sorting-class", "table-active");
+      row.className = "table-active";
       displayLectureContent(lecture);
       MainScreen.buttons.summarize.onclick = () => switchContent(lecture);
     };
     MainScreen.display.lectures.appendChild(row);
   });
-  let currentTable = document.getElementsByClassName("sorting-class");
-  sortTable(currentTable);
 }
 
 /** switch between full transcription and summary */
 function switchContent(lecture) {
   if (MainScreen.display.content_type === "full") {
     MainScreen.display.content_type = "summary";
-    MainScreen.buttons.summarize.className = "btn btn-primary";
-    MainScreen.buttons.summarize.innerHTML = "Summarize";
+    //MainScreen.buttons.summarize.className = "btn btn-primary";
+    MainScreen.buttons.summarize.innerHTML = "Summary";
   } else {
     MainScreen.display.content_type = "full";
-    MainScreen.buttons.summarize.className = "btn btn-outline-primary";
-    MainScreen.buttons.summarize.innerHTML = "Full-text";
+    //MainScreen.buttons.summarize.className = "btn btn-outline-primary";
+    MainScreen.buttons.summarize.innerHTML = "Full-Text";
   }
   displayLectureContent(lecture);
 }
@@ -216,12 +211,9 @@ async function readText(file) {
 /////////////////////////////////////////////////////////
 
 async function submit() {
-  const empty_input = Object.keys(Popup.input).some(
-    (k) => !Popup.input[k].value.length
-  );
   const file1 = Popup.file.fulltrans.files[0];
   const file2 = Popup.file.summary.files[0];
-  if (empty_input || !(file1 && file2)) return;
+  if (emptyInputs(Popup.input) || !(file1 && file2)) return;
 
   try {
     const res1 = await readText(file1);
@@ -234,7 +226,7 @@ async function submit() {
       target = courses.find((c) => c.subject === subject);
     }
 
-    target.lectures.push({
+    orderedInsert(target.lectures, {
       Name: Popup.input.name.value,
       Due: Popup.input.due.value,
       Week: Popup.input.week.value,
@@ -262,31 +254,27 @@ function closePopup(do_flush) {
   Popup.bg.style.display = "none";
 }
 
+
+function emptyInputs(input) {
+  return Object.keys(input).some((k) => !input[k].value.length);
+}
+
+
 function clearInputs(inputs) {
   Object.keys(inputs).forEach((k) => (inputs[k].value = ""));
 }
 
-function sortTable(table) {
-  var switching, i, x, y, shouldSwitch;
-  switching = true;
 
-  while (switching) {
-    switching = false;
-    for (i = 1; i < table.length - 1; i++) {
-      shouldSwitch = false;
-      x = table[i].getElementsByTagName("td")[0];
-      y = table[i + 1].getElementsByTagName("td")[0];
-      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-        shouldSwitch = true;
-        break;
-      }
-    }
-    if (shouldSwitch) {
-      table[i].parentNode.insertBefore(table[i + 1], table[i]);
-      switching = true;
-    }
+function orderedInsert(lectures, lecture) {
+  let i = lectures.length;
+  const week = Number.parseInt(lecture.Week);
+  while (i > 0 && week < Number.parseInt(lectures[i - 1].Week)) {
+    --i;
   }
+  lectures.splice(i, 0, lecture);
 }
+
+
 
 runMain();
 runPopup();
