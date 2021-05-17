@@ -57,6 +57,7 @@ const MainScreen = {
     lectures: document.getElementById("lecture-list-body"),
     content_type: "full",
     lecture_content: document.getElementById("lecture-content"),
+    lecture_main_title: document.getElementById("lecture-main-title"),
   },
 };
 
@@ -124,6 +125,7 @@ function addCourse(subject) {
       r.className = "";
     });
     row.className = "table-active";
+    MainScreen.display.lecture_main_title.innerHTML = `Lectures of ${name.innerHTML}`;
     displayLectures(courses[last]);
   };
 
@@ -153,6 +155,7 @@ function displayLectures(course) {
   MainScreen.display.lectures.innerHTML = "";
   course.lectures.forEach((lecture) => {
     let row = document.createElement("tr");
+    row.className = "sorting-class";
     row.innerHTML = `
     <td>${lecture.Week}</td>
     <td>${lecture.Name}</td>
@@ -161,12 +164,14 @@ function displayLectures(course) {
     row.onclick = () => {
       let childnodes = MainScreen.display.lectures.childNodes;
       childnodes.forEach((r) => (r.className = ""));
-      row.className = "table-active";
+      row.classList.add = ("sorting-class", "table-active");
       displayLectureContent(lecture);
       MainScreen.buttons.summarize.onclick = () => switchContent(lecture);
     };
     MainScreen.display.lectures.appendChild(row);
   });
+  let currentTable = document.getElementsByClassName("sorting-class");
+  sortTable(currentTable);
 }
 
 /** switch between full transcription and summary */
@@ -259,6 +264,28 @@ function closePopup(do_flush) {
 
 function clearInputs(inputs) {
   Object.keys(inputs).forEach((k) => (inputs[k].value = ""));
+}
+
+function sortTable(table) {
+  var switching, i, x, y, shouldSwitch;
+  switching = true;
+
+  while (switching) {
+    switching = false;
+    for (i = 1; i < table.length - 1; i++) {
+      shouldSwitch = false;
+      x = table[i].getElementsByTagName("td")[0];
+      y = table[i + 1].getElementsByTagName("td")[0];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      table[i].parentNode.insertBefore(table[i + 1], table[i]);
+      switching = true;
+    }
+  }
 }
 
 runMain();
