@@ -32,7 +32,7 @@ function loadCourses() {
   if (!lastCourses) return;
 
   const data = JSON.parse(lastCourses);
-  data.forEach((course) => addCourse(course.subject));
+  data.forEach((course) => addCourse(course.subject, course.professor));
   courses = data;
 }
 
@@ -113,11 +113,14 @@ const runPopup = () => {
 /////////////////////////////////////////////////////////
 
 function addCourse(subject, professor) {
-  if (!subject.length || courses.find((c) => c.subject === subject)) return;
+  if (
+    !subject.length ||
+    !professor.length ||
+    courses.find((c) => c.subject === subject)
+  )
+    return;
 
-  if (!professor.length) professor = "Instructor";
-
-  courses.push({ subject, lectures: [] });
+  courses.push({ subject, professor, lectures: [] });
   let last = courses.length - 1;
 
   let row = document.createElement("tr");
