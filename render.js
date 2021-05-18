@@ -1,3 +1,5 @@
+const { Main } = require("electron");
+
 NodeList.prototype.forEach = Array.prototype.forEach; // neat prototype hack to enable forEach
 
 let courses = []; // stores COURSE_OBJECTs
@@ -86,7 +88,7 @@ const runMain = () => {
   Popup.bg.style.display = "none";
 
   MainScreen.buttons.add.addEventListener("click", () => {
-    addCourse(MainScreen.input.course.value);
+    addCourse(MainScreen.input.course.value, MainScreen.input.professor.value);
     MainScreen.input.course.value = "";
     MainScreen.input.professor.value = "";
     saveCourses();
@@ -110,24 +112,28 @@ const runPopup = () => {
 ////////////////  MAIN SCREEN FUNCTIONS  ////////////////
 /////////////////////////////////////////////////////////
 
-function addCourse(subject) {
+function addCourse(subject, professor) {
   if (!subject.length || courses.find((c) => c.subject === subject)) return;
 
   courses.push({ subject, lectures: [] });
   let last = courses.length - 1;
 
   let row = document.createElement("tr");
-
-  let name = document.createElement("td");
-  name.className = "col-md-5";
-  name.innerHTML = subject;
-  name.onclick = () => {
+  row.onclick = () => {
     let childnodes = MainScreen.display.courses.childNodes;
     childnodes.forEach((r) => (r.className = ""));
     row.className = "table-active";
     MainScreen.display.lecture_main_title.innerHTML = `Lectures of ${name.innerHTML}`;
     displayLectures(courses[last]);
   };
+
+  let name = document.createElement("td");
+  name.className = "col-sm-1";
+  name.innerHTML = subject;
+
+  let prof = document.createElement("td");
+  prof.className = "col-sm-2";
+  prof.innerHTML = professor;
 
   let btn = document.createElement("td");
   let btn_remov = document.createElement("button");
@@ -141,6 +147,7 @@ function addCourse(subject) {
   btn.appendChild(btn_remov);
 
   row.appendChild(name);
+  row.appendChild(prof);
   row.appendChild(btn);
   MainScreen.display.courses.appendChild(row);
 }
