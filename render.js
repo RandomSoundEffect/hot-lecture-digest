@@ -51,6 +51,7 @@ const MainScreen = {
   },
   input: {
     course: document.getElementById("course-input"),
+    professor: document.getElementById("professor-input"),
   },
   display: {
     courses: document.getElementById("course-list-body"),
@@ -87,6 +88,7 @@ const runMain = () => {
   MainScreen.buttons.add.addEventListener("click", () => {
     addCourse(MainScreen.input.course.value);
     MainScreen.input.course.value = "";
+    MainScreen.input.professor.value = "";
     saveCourses();
   });
 
@@ -254,16 +256,13 @@ function closePopup(do_flush) {
   Popup.bg.style.display = "none";
 }
 
-
 function emptyInputs(input) {
   return Object.keys(input).some((k) => !input[k].value.length);
 }
 
-
 function clearInputs(inputs) {
   Object.keys(inputs).forEach((k) => (inputs[k].value = ""));
 }
-
 
 function orderedInsert(lectures, lecture) {
   let i = lectures.length;
@@ -273,8 +272,6 @@ function orderedInsert(lectures, lecture) {
   }
   lectures.splice(i, 0, lecture);
 }
-
-
 
 runMain();
 runPopup();
