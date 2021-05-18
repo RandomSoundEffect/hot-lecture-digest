@@ -115,6 +115,8 @@ const runPopup = () => {
 function addCourse(subject, professor) {
   if (!subject.length || courses.find((c) => c.subject === subject)) return;
 
+  if (!professor.length) professor = "Instructor";
+
   courses.push({ subject, lectures: [] });
   let last = courses.length - 1;
 
