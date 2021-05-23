@@ -1,5 +1,3 @@
-const { Main } = require("electron");
-
 NodeList.prototype.forEach = Array.prototype.forEach; // neat prototype hack to enable forEach
 
 let courses = []; // stores COURSE_OBJECTs

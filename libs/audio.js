@@ -27,14 +27,10 @@ function extractAudioFromVideo(dst, src, options) {
     ])
       .input(src)
       .output(dst)
-      .on('end', () => {
-        resolve();
-      })
-      .on('error', e => {
-        return reject(new Error(e));
-      }).run();
+      .on('end', resolve)
+      .on('error', e => reject(new Error(e)))
+      .run();
   });
-
 }
 
 exports.extractAudioFromVideo = extractAudioFromVideo;

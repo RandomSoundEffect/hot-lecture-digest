@@ -1,6 +1,6 @@
-const reqtrans = require("./reqtrans.js");
-const storage = require("./storage.js")
-const audio = require("./audio.js");
+const reqtrans = require("./reqtrans");
+const storage = require("./storage")
+const audio = require("./audio");
 
 const fs = require("fs");
 
