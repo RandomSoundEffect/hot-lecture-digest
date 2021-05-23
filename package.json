@@ -5,7 +5,9 @@
   "main": "main.js",
   "scripts": {
     "test": "jest",
-    "start": "electron ."
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,11 @@
   },
   "homepage": "https://github.com/OSSP-group-5/hot-lecture-digest#readme",
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.56",
+    "@electron-forge/maker-deb": "^6.0.0-beta.56",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.56",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.56",
+    "@electron-forge/maker-zip": "^6.0.0-beta.56",
     "electron": "^12.0.7",
     "jest": "^26.6.3"
   },
@@ -28,8 +35,36 @@
     "@google-cloud/speech": "^4.5.0",
     "@google-cloud/storage": "^5.8.5",
     "electron-require": "^0.3.0",
+    "electron-squirrel-startup": "^1.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "node-summarizer": "^1.0.7",
     "path": "^0.12.7"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "hot_lecture_digest"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
   }
 }
