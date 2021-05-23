@@ -60,7 +60,27 @@ In package.json
 
 ## **Examples**
 
-screenshots
+###User Interface
+![tempsnip](https://user-images.githubusercontent.com/38829593/119261056-8f9f1c00-bc10-11eb-9e3f-fb219eea05fc.png)
+- Red box: Area for displaying registered courses. Click on the course to select specific course.
+- Blue box: Area for the list of lectures imported for the selected course. Click lecture to view textual information on the lecture. Toggle between "Full-Text" and "Summary" to view each of the following.
+    Full-Text: Area for the textual information of the whole lecture obtained with google speech API
+    Summary: Summarized version of the Full-Text using node-summary module.
+- Green box: Area for the textual information of the whole lecture or the summary.
+
+
+###Input
+![tempsnip1](https://user-images.githubusercontent.com/38829593/119261393-2c15ee00-bc12-11eb-8fc7-14cf1934b359.png)
+- Red box: For course input. Receive course name and professor, and a course instance will be created.
+- Blue box: For lecture input. A pop-up will appear at the bottom right corner of the display.
+
+###Pop-up for Lecture Input
+![tempsnip2](https://user-images.githubusercontent.com/38829593/119261611-1d7c0680-bc13-11eb-8ba9-0d3e9842aaff.png)
+- Pop-up: Receives course, name, week, due date, and text files from the user to make a lecture instance. (Videos are transformed into text files via backend functions)
+
+
+
+
 
 videos
 
@@ -200,12 +220,12 @@ All complaints will be reviewed and investigated promptly and fairly.
 All community leaders are obligated to respect the privacy and security of the
 reporter of any incident.
 
-### Enforcement Guidelines
+## Enforcement Guidelines
 
 Community leaders will follow these Community Impact Guidelines in determining
 the consequences for any action they deem in violation of this Code of Conduct:
 
-#### 1. Correction
+### 1. Correction
 
 **Community Impact**: Use of inappropriate language or other behavior deemed
 unprofessional or unwelcome in the community.
@@ -214,7 +234,7 @@ unprofessional or unwelcome in the community.
 clarity around the nature of the violation and an explanation of why the
 behavior was inappropriate. A public apology may be requested.
 
-#### 2. Warning
+### 2. Warning
 
 **Community Impact**: A violation through a single incident or series
 of actions.
@@ -226,7 +246,7 @@ includes avoiding interactions in community spaces as well as external channels
 like social media. Violating these terms may lead to a temporary or
 permanent ban.
 
-#### 3. Temporary Ban
+### 3. Temporary Ban
 
 **Community Impact**: A serious violation of community standards, including
 sustained inappropriate behavior.
@@ -237,7 +257,7 @@ private interaction with the people involved, including unsolicited interaction
 with those enforcing the Code of Conduct, is allowed during this period.
 Violating these terms may lead to a permanent ban.
 
-#### 4. Permanent Ban
+### 4. Permanent Ban
 
 **Community Impact**: Demonstrating a pattern of violation of community
 standards, including sustained inappropriate behavior,  harassment of an
@@ -246,7 +266,7 @@ individual, or aggression toward or disparagement of classes of individuals.
 **Consequence**: A permanent ban from any sort of public interaction within
 the community.
 
-### Attribution
+## Attribution
 
 This Code of Conduct is adapted from the [Contributor Covenant][homepage],
 version 2.0, available at
