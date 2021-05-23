@@ -1,7 +1,50 @@
 # Hot Lecture Digest 🔥
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/72ae173a-3684-4035-8716-bfef4f6f75c7/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/72ae173a-3684-4035-8716-bfef4f6f75c7/Untitled.png)
+<img src="https://user-images.githubusercontent.com/54666446/119255797-8609ba00-bbf8-11eb-89dd-aa43c1c476f5.png" width="300" height="300">
 
+*Your week is here.*
+
+Hot Lecture Digest is a program that consists of two core parts. One is the 'speech-to-text' tool that coverts Kingos' lecture into script, and the other is an administration tool with GUI which organizes your school-week. Hot Lecture Digest will be an ultimate weapon for Kingos to manage school works in these difficult days due to the pandemic.
+
+### Useful Websites
+
+- [i-Campus](http://canvas.skku.edu)
+- [SKKU](http://skku.edu)
+
+## **License - MIT license** ⚖️
+
+Hot Lecture Digest os released under the terms of the MIT license. Click [here](https://github.com/OSSP-group-5/hot-lecture-digest/blob/main/LICENSE) for more information or see the [original](https://opensource.org/licenses/MIT).
+
+## **Desktop app for lecture summarization**
+
+## **A brief overview**
+
+## **Links to resources**
+
+## **Installation**
+
+## **API reference**
+
+## **Examples**
+
+## **Releases (versions)**
+
+## **How to contribute**
+
+## **Code of Conduct**
+
+### **Things to do**
+
+- how to use google API
+- how to use the app
+
+The name of your app
+
+A screenshot of your app
+
+A link to a short demo video (I recommend you to upload the demo video to YouTube and attach a link)
+
+Installation instructions, how to use, examples, etc
 free of license
 
 Hot Lecture Digest is a program that consists of two core parts. One is the 'speech-to-text' tool that coverts Kingos' lecture into script, and the other is an administration tool with GUI which organizes your school-week. Hot Lecture Digest will be an ultimate weapon for Kingos to manage school works in these difficult days due to the pandemic.
