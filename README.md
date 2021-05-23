@@ -21,8 +21,12 @@ Get lecture files from i-Campus with proper permission.
 
 ### **Things to do**
 
+- installation instruction
 - how to use google API
 - how to use the app
+- screenshots
+- demo video-youtube links 
+- examples 
 
 여기에 사용방법이 들어가야 할 듯 합니다.
 
@@ -257,16 +261,15 @@ For answers to common questions about this code of conduct, see the FAQ at
 https://www.contributor-covenant.org/faq. Translations are available at
 https://www.contributor-covenant.org/translations.
 
+## Proposal과의 차이점
 
-### **Things to do**
+1. 구현 시 어려움에 따라 desktop application을 두 부분으로 나누었습니다.
+    - electron을 통해 GUI 구현
+    - 음성인식 및 요약 기능을 node.js를 통해 구현
 
-- how to use google API
-- how to use the app
+    ⇒ 두 기능을 엮는 적절한 방법을 찾지 못해 현재 두 개의 프로그램으로 구현하였습니다.
 
-The name of your app
-
-A screenshot of your app
-
-A link to a short demo video (I recommend you to upload the demo video to YouTube and attach a link)
-
-Installation instructions, how to use, examples, etc
+2. 파이썬 + HTML + Javascript의 환경에서 Javascript + HTML의 환경으로 변하였습니다.
+3. 자바스크립트를 씀에 따라 사용한 라이브러리가 변화하였습니다. 사용한 라이브러리는 본 문서 상단 [이곳에](https://github.com/OSSP-group-5/hot-lecture-digest#api-reference) 기재하였습니다.
+4. 변화한 세부 사용 시나리오에 대해서는 본 문서 상단 [이곳에](https://github.com/OSSP-group-5/hot-lecture-digest#Installation) 기재하였습니다.
+5. 강의 영상을 앱에 import하는 방식에서 src폴더에 사용자가 직접 영상을 복사하고, 같은 디렉토리에 full script와 summary 텍스트 파일을 생성한다. 이 생성된 파일을 electron 앱에 강의 정보와 함께 등록함으로써 사용자는 한 주를 효율적으로 관리할 수 있게 됩니다.
