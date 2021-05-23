@@ -1,26 +1,44 @@
-# hot-lecture-digest
+# Hot Lecture Digest 🔥
 
-## Desktop app for lecture summarization
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/72ae173a-3684-4035-8716-bfef4f6f75c7/Untitled.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/72ae173a-3684-4035-8716-bfef4f6f75c7/Untitled.png)
 
-## A brief overview
+free of license
 
-## Links to resources
+Hot Lecture Digest is a program that consists of two core parts. One is the 'speech-to-text' tool that coverts Kingos' lecture into script, and the other is an administration tool with GUI which organizes your school-week. Hot Lecture Digest will be an ultimate weapon for Kingos to manage school works in these difficult days due to the pandemic.
 
-## Installation
+[Related Websites](https://www.notion.so/6717f4e4f9d74285aa68464d955576cd)
 
-## API reference
+## **License - MIT license** ⚖️
 
-## Examples
+Hot Lecture Digest os released under the terms of the MIT license. Click [here](https://github.com/OSSP-group-5/hot-lecture-digest/blob/main/LICENSE) for more information or see the [original](https://opensource.org/licenses/MIT)
 
-## Releases (versions)
+## **Desktop app for lecture summarization**
 
-## How to contribute
+## **A brief overview**
 
-## License
+## **Links to resources**
 
-## Code of Conduct
+## **Installation**
 
-### Things to do
+## **API reference**
+
+## **Examples**
+
+## **Releases (versions)**
+
+## **How to contribute**
+
+## **Code of Conduct**
+
+### **Things to do**
 
 - how to use google API
 - how to use the app
+
+The name of your app
+
+A screenshot of your app
+
+A link to a short demo video (I recommend you to upload the demo video to YouTube and attach a link)
+
+Installation instructions, how to use, examples, etc
