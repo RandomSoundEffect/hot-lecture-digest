@@ -9,6 +9,9 @@
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
+  "bin": {
+    "summarize": "./backend.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OSSP-group-5/hot-lecture-digest.git"

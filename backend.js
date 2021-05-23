@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require("fs");
 
 const speech = require("@google-cloud/speech");
@@ -8,9 +10,18 @@ const { outputSummary } = require("./libs/summarizer");
 const { isVideo } = require("./libs/misc");
 
 const main = async () => {
-  const SRCPATH = './src/';
-  const KEYPATH = './gcloud/private_key.json';
-  const BUCKET = fs.readFileSync('./gcloud/bucket.txt', "utf8").trim();
+  if (process.argv.length === 2) {
+    console.log("Usage: summarize <video folder path(including last \\ or /)> <private json key path> <gcloud bucket name>");
+    process.exit(1);
+  }
+  if (process.argv.length !== 5) {
+    console.error("INSUFFICIENT ARGUMENTS");
+    process.exit(1);
+  }
+
+  const SRCPATH = process.argv[2];
+  const KEYPATH = process.argv[3];
+  const BUCKET = process.argv[4];
 
   const opt = { keyFilename: KEYPATH };
 
