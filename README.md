@@ -117,9 +117,9 @@ Pull requests are the best way to propose changes to the codebase (we use [Gith
 5. Make sure your code lints.
 6. Issue that pull request!
 
-### **Any contributions you make will be under the MIT Software License**
+### **Any contributions you make will be under the GPL v3.0 Software License**
 
-In short, when you submit code changes, your submissions are understood to be under the same [MIT License](http://choosealicense.com/licenses/mit/) that covers the project. Feel free to contact the maintainers if that's a concern.
+In short, when you submit code changes, your submissions are understood to be under the same [GPlL v3.0 License](https://www.gnu.org/licenses/gpl-3.0.en.html) that covers the project. Feel free to contact the maintainers if that's a concern.
 
 ### **Report bugs using Github's [issues](https://github.com/OSSP-group-5/hot-lecture-digest/issues)**
 
