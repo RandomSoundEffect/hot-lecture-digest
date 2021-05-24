@@ -88,7 +88,8 @@ In package.json
 
 
 ### Demonstration Video
-Pending for update.
+[Video Link](https://youtu.be/DrI7YrtlUBw)
+
 
 ## **Releases (versions)***********************************
 
