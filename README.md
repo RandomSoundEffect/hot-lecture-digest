@@ -29,8 +29,8 @@ Get lecture files from i-Campus with proper permission.
 ### Setup backend
   1. Download [ffmpeg](https://www.wikihow.com/Install-FFmpeg-on-Windows) 
   2. Set "[path_to_ffmpeg]/bin" to PATH environment variable
-  3. Make private key for Google Cloud APIs [(link)[https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries]]
-  4. Make bucket in Google Cloud Storage [(link)[https://cloud.google.com/storage]]
+  3. Make private key for Google Cloud APIs [[link](https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries)]
+  4. Make bucket in Google Cloud Storage [[link](https://cloud.google.com/storage)]
 
 ## **API reference**
 
