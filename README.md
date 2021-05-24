@@ -6,9 +6,9 @@
 
 Hot Lecture Digest is a program that consists of two core parts. One is the 'speech-to-text' tool that coverts Kingos' lecture into script, and the other is an administration tool with GUI which organizes your school-week. Hot Lecture Digest will be an ultimate weapon for Kingos to manage school works in these difficult days due to the pandemic.
 
-## **License - MIT license** ⚖️
+## **License - GPL v3.0 license** ⚖️
 
-Hot Lecture Digest is released under the terms of the MIT license. Click [here](https://github.com/OSSP-group-5/hot-lecture-digest/blob/main/LICENSE) for more information or see the [original](https://opensource.org/licenses/MIT).
+Hot Lecture Digest is released under the terms of the GPL v3.0 license. Click [here](https://github.com/OSSP-group-5/hot-lecture-digest/blob/main/LICENSE) for more information or see the [original](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 ## **Links to resources**
 
