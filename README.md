@@ -60,6 +60,11 @@ In package.json
 
 ## **Examples**
 
+### CLI
+![image](https://user-images.githubusercontent.com/38829593/119342372-f3d4e500-bccf-11eb-85fb-3a899c17851c.png)
+- "summarize" command: ![image](https://user-images.githubusercontent.com/38829593/119342476-1961ee80-bcd0-11eb-8128-97b616984fde.png)
+
+
 ### User Interface
 ![tempsnip](https://user-images.githubusercontent.com/38829593/119261056-8f9f1c00-bc10-11eb-9e3f-fb219eea05fc.png)
 - Red box: Area for displaying registered courses. Click on the course to select specific course.
