@@ -22,9 +22,7 @@ Get lecture files from i-Campus with proper permission.
 ### Download & Extract File
   1. Download **hot-lecture-digest-win32-x64.zip** from https://github.com/OSSP-group-5/hot-lecture-digest/releases/tag/1.0.0
   2. Extract file, and open **backend** folder
-  3. Extract **hot-lecture-digest-1.0.0**
-  4. Open **package** folder
-  5. In command line: `npm install -g package.json`
+  3. In command line: `npm install -g hot-lecture-digest-1.0.0.tgz`
 
 ### Setup backend
   1. Download [ffmpeg](https://www.wikihow.com/Install-FFmpeg-on-Windows) 
