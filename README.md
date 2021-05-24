@@ -150,7 +150,7 @@ I'm again borrowing these from [Facebook's Guidelines](https://github.com/faceb
 
 ### **License**
 
-By contributing, you agree that your contributions will be licensed under its MIT License.
+By contributing, you agree that your contributions will be licensed under its GPL v3.0 License.
 
 ### **References**
 
