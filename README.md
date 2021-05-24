@@ -19,16 +19,18 @@ Get lecture files from i-Campus with proper permission.
 
 ## **Installation**
 
-### **Things to do**
+### Download & Extract File
+  1. Download hot-lecture-digest-win32-x64.zip from https://github.com/OSSP-group-5/hot-lecture-digest/releases/tag/1.0.0
+  2. Extract file, and open backend folder
+  3. Extract hot-lecture-digest-1.0.0
+  4. Open package folder
+  5. In command line: `npm install -g package.json`
 
-- installation instruction
-- how to use google API
-- how to use the app
-- screenshots
-- demo video-youtube links 
-- examples 
-
-여기에 사용방법이 들어가야 할 듯 합니다.
+### Setup backend
+  1. Download [ffmpeg](https://www.wikihow.com/Install-FFmpeg-on-Windows) 
+  2. Set "[path_to_ffmpeg]/bin" to PATH environment variable
+  3. Make private key for Google Cloud APIs [(link)[https://cloud.google.com/speech-to-text/docs/quickstart-client-libraries]]
+  4. Make bucket in Google Cloud Storage [(link)[https://cloud.google.com/storage]]
 
 ## **API reference**
 
@@ -58,10 +60,10 @@ In package.json
 - [node-summarizer](https://github.com/SwapnikKatkoori/node-summarizer#readme)
 - [path](https://nodejs.org/docs/latest/api/path.html)
 
-## **Examples**
+## **Usage**
 
-### CLI
-![image](https://user-images.githubusercontent.com/38829593/119342372-f3d4e500-bccf-11eb-85fb-3a899c17851c.png)
+### Get transcript for Video
+- Use CLI command `summarize <video folder path(including last \ or /)> <private json key path> <gcloud bucket name>` to summarize videos in folder
 - "summarize" command: ![image](https://user-images.githubusercontent.com/38829593/119342476-1961ee80-bcd0-11eb-8128-97b616984fde.png)
 
 
