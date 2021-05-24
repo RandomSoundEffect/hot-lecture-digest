@@ -64,7 +64,7 @@ In package.json
 
 ### Get transcript for Video
 - Use CLI command `summarize <video folder path(including last \ or /)> <private json key path> <gcloud bucket name>` to summarize videos in folder
-- "summarize" command: ![image](https://user-images.githubusercontent.com/38829593/119342476-1961ee80-bcd0-11eb-8128-97b616984fde.png)
+- "summarize" command example: ![image](https://user-images.githubusercontent.com/38829593/119342372-f3d4e500-bccf-11eb-85fb-3a899c17851c.png)
 
 
 ### User Interface
